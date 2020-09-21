@@ -18,7 +18,7 @@ let bC;
 let tC;
 
 function setup() {
-	pixelDensity(1);
+	pixelDensity(2);
   createCanvas(400, 550);
   this.iTimer3 = 0;
   this.iTimer4 = 0;
