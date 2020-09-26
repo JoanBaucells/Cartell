@@ -1,9 +1,9 @@
 class LLetre {
-  constructor(lletre, x, y, size, color, font, tComAnim) {
+  constructor(lletre, x, y, size, color, font, tComAnim, yF) {
     this.lletre = lletre;
     this.x = x;
-    this.yF = y;
-    this.y = -45;
+    this.yF = yF;
+    this.y = y;
     this.size = size;
     this.color = color;
     this.font = font;

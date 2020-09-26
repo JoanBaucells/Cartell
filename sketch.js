@@ -9,22 +9,28 @@ let arBoles8 = [];
 let arBoles9 = [];
 let arArrayBoles = [];
 let arText = [];
+let arTextE = [];
+let arTextD = [];
+let arFonts = [];
 let iTimer3;
 let iTimer4;
 let iTimer6;
 let iTimer7;
 let iTimeAnimLl;
+let iTimeAnimE;
+let iTimeAnimD;
 let bC;
 let tC;
 
 function setup() {
-	pixelDensity(2);
+  pixelDensity(1);
   createCanvas(400, 550);
   this.iTimer3 = 0;
   this.iTimer4 = 0;
   this.iTimer6 = 0;
   this.iTimer7 = 0;
   this.iTimeAnimLl = 0;
+  this.iTimeAnimE = 0;
   this.bC = color(255, 0, 0);
   this.tC = color(255,255,255)
   arArrayBoles.push(arBoles);
@@ -36,15 +42,14 @@ function setup() {
   arArrayBoles.push(arBoles7);
   arArrayBoles.push(arBoles8);
   arArrayBoles.push(arBoles9);
-  
+  this.iniArFonts();
 }
 
 function draw() {
-  let bc = color(0, 0, 0, 25);
-  let value = alpha(bc);
-  fill(value);
-  background(value);
-  
+  squareColor = color(0, 0, 0);
+  squareColor.setAlpha(25 );
+  fill(squareColor);
+  rect(0, 0, 400, 550);
   this.Primer_Rengla();
   this.Segon_Rengla();
   this.Tercer_Rengla();
@@ -57,8 +62,12 @@ function draw() {
   
   if(arText.length == 0){  
     this.Crear_Paraula();
+    this.Crear_Text_Esquerra();
+    this.Crear_Text_Dreta();
   }else{
     this.Moure_Lletres();
+    this.Moure_Text_Esquerra();
+    this.Moure_Text_Dreta();
   }
 }
 
@@ -70,18 +79,55 @@ function deviceShaken() {
   this.Reset_Animation()
 }
 
+function iniArFonts(){
+  append(arFonts, 'Tangerine');
+  append(arFonts, 'Ranchers');
+  append(arFonts, 'Oswald');
+  append(arFonts, 'Kufam');
+  append(arFonts, 'Robot Mono');
+  append(arFonts, 'Grandstander');
+  append(arFonts, 'Open Sans Condensed');
+  append(arFonts, 'Quicksand');
+  append(arFonts, 'Courier Prime');
+  append(arFonts, 'Grenze Gotisch');
+  append(arFonts, 'Inconsolata');
+  append(arFonts, 'Lobster');
+  append(arFonts, 'Source Code Pro');
+  append(arFonts, 'Dancing Script');
+}
+
 function Crear_Paraula(){
   this.iTimeAnimLl = 0;
-  append(arText, new LLetre("S", 210, 540, 45, this.tC, 'Georgia', 0));
-  append(arText, new LLetre("E", 170, 485, 45, this.tC, 'Georgia', 20));
-  append(arText, new LLetre("C", 210, 430, 45, this.tC, 'Georgia', 40));
-  append(arText, new LLetre("N", 170, 375, 45, this.tC, 'Georgia', 60));
-  append(arText, new LLetre("A", 210, 320, 45, this.tC, 'Georgia', 80));
-  append(arText, new LLetre("N", 170, 265, 45, this.tC, 'Georgia', 100));
-  append(arText, new LLetre("O", 210, 210, 45, this.tC, 'Georgia', 120));
-  append(arText, new LLetre("S", 170, 155, 45, this.tC, 'Georgia', 140));
-  append(arText, new LLetre("É", 210, 100, 45, this.tC, 'Georgia', 160));
-  append(arText, new LLetre("R", 170, 45, 45, this.tC, 'Georgia', 180));
+  append(arText, new LLetre("S", 210, -45, 45, this.tC, this.Get_Font(), 0, 540));
+  append(arText, new LLetre("E", 170, -45, 45, this.tC, this.Get_Font(), 20, 485));
+  append(arText, new LLetre("C", 210, -45, 45, this.tC, this.Get_Font(), 40, 430));
+  append(arText, new LLetre("N", 170, -45, 45, this.tC, this.Get_Font(), 60, 375));
+  append(arText, new LLetre("A", 210, -45, 45, this.tC, this.Get_Font(), 80, 320));
+  append(arText, new LLetre("N", 170, -45, 45, this.tC, this.Get_Font(), 100, 265));
+  append(arText, new LLetre("O", 210, -45, 45, this.tC, this.Get_Font(), 120, 210));
+  append(arText, new LLetre("S", 170, -45, 45, this.tC, this.Get_Font(), 140, 155));
+  append(arText, new LLetre("É", 210, -45, 45, this.tC, this.Get_Font(), 160, 100));
+  append(arText, new LLetre("R", 170, -45, 45, this.tC, this.Get_Font(), 180, 45));
+}
+
+function Crear_Text_Esquerra(){
+  this.iTimeAnimE = 0;
+  append(arTextE, new LLetre("ELECTRONIC", -20, 25, 10, this.bC, this.Get_Font(), 10, 20))
+  append(arTextE, new LLetre("MUSIC", -20, 35, 10, this.bC, this.Get_Font(), 30, 20));
+  append(arTextE, new LLetre("FESTIVAL", -20, 45, 10, this.bC, this.Get_Font(), 50, 20));
+  append(arTextE, new LLetre("#7", -20, 55, 10, this.bC, this.Get_Font(), 20, 20));
+}
+
+function Crear_Text_Dreta(){
+  this.iTimeAnimD = 0;
+  append(arTextD, new LLetre("DIJON", 420, 500, 10, this.bC, this.Get_Font(), 10, 350))
+  append(arTextD, new LLetre("DU O7 AU IO", 420, 510, 10, this.bC, this.Get_Font(), 30, 315));
+  append(arTextD, new LLetre("NOVEMBER", 420, 520, 10, this.bC, this.Get_Font(), 50, 323));
+  append(arTextD, new LLetre("ºO13", 420, 530, 10, this.bC, this.Get_Font(), 20, 353));
+}
+
+function Get_Font(){
+  return arFonts[int(random(arFonts.length -1))];
 }
 
 function Moure_Lletres(){
@@ -103,11 +149,52 @@ function Moure_Lletres(){
   }
 }
 
+function Moure_Text_Esquerra(){
+    this.iTimeAnimE += 1;
+  for(i = 0; i < arTextE.length; i++){
+    if(this.iTimeAnimE >= arTextE[i].tComAnim){
+      if(arTextE[i].iCont >= 500){
+        arTextE[i].move(0,-1);
+      }else if(arTextE[i].x >= arTextE[i].yF){
+        arTextE[i].iCont += 1;
+        arTextE[i].pintar_Lletre();
+      }else{
+        arTextE[i].move(1,0);
+      }
+    }
+    if(arTextE[i].y == -10){
+      arTextE.splice(i, 1);
+    }
+  }
+}
+
+function Moure_Text_Dreta(){
+  
+  this.iTimeAnimD += 1;
+  for(i = 0; i < arTextD.length; i++){
+    if(this.iTimeAnimD >= arTextD[i].tComAnim){
+      if(arTextD[i].iCont >= 500){
+        arTextD[i].move(0,1);
+      }else if(arTextD[i].x <= arTextD[i].yF){
+        arTextD[i].iCont += 1;
+        arTextD[i].pintar_Lletre();
+      }else{
+        arTextD[i].move(-1,0);
+      }
+    }
+    if(arTextD[i].y == -10){
+      arTextD.splice(i, 1);
+    }
+  }
+}
+
 function Reset_Animation(){
   for (var i = 0; i < arArrayBoles.length; i++){
      arArrayBoles[i].splice(0, arArrayBoles[i].length); 
   }
   arText.splice(0, arText.length);
+  arTextD.splice(0, arTextD.length);
+  arTextE.splice(0, arTextE.length);
 }
 
 function Novena_Rengla(){
